@@ -24,7 +24,7 @@ public class LoginController extends HttpServlet {
         // Truyen gia tri tu jsp sang servlet
         request.setAttribute("mess1","Xin chao");
         // Hiển thị lên giao diện
-        request.getRequestDispatcher("form-login.jsp").forward(request, response);
+        request.getRequestDispatcher("/buoi2/form-login.jsp").forward(request, response);
 //        response.sendRedirect("/form-login.jsp");
     }
 
@@ -39,6 +39,6 @@ public class LoginController extends HttpServlet {
         request.setAttribute("u2",password);
 
         // Chuyen trang
-        request.getRequestDispatcher("ket-qua.jsp").forward(request,response);
+        request.getRequestDispatcher("/buoi2/b2kq/ket-qua.jsp").forward(request,response);
     }
 }
