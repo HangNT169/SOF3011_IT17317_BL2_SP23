@@ -6,9 +6,11 @@ package com.poly.hangnt169.B3_CRUDListFixCung.controller;
 import com.poly.hangnt169.B3_CRUDListFixCung.entity.SinhVien;
 import com.poly.hangnt169.B3_CRUDListFixCung.service.SinhVienService;
 import com.poly.hangnt169.B3_CRUDListFixCung.service.impl.SinhVienServiceImpl;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -74,32 +76,67 @@ public class SinhVienController extends HttpServlet {
     private void updateSinhVien(HttpServletRequest request, HttpServletResponse response) {
     }
 
-    private void addSinhVien(HttpServletRequest request, HttpServletResponse response) {
+    private void addSinhVien(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String mssv= request.getParameter("mssv");
+        String tenStr= request.getParameter("ten");
+        String tuoi= request.getParameter("tuoi");
+        String diaChi= request.getParameter("diaChi");
+        String gioiTinh= request.getParameter("gioiTinh");
+        SinhVien sinhVien = SinhVien.builder()
+                .ten(tenStr)
+                .mssv(mssv)
+                .tuoi(Integer.valueOf(tuoi))
+                .diaChi(diaChi)
+                .gioiTinh(Boolean.valueOf(gioiTinh))
+                .build();
+        sinhViens.add(sinhVien);
+        request.setAttribute("listSinhVien", sinhViens);
+        request.getRequestDispatcher("/buoi3/sinhviens.jsp").forward(request, response);
     }
 
-    private void viewUpdateSinhVien(HttpServletRequest request, HttpServletResponse response) {
+    private void viewUpdateSinhVien(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Lay gia tri tu jsp ve servlet
+        String mssv = request.getParameter("id");
+        SinhVien sinhVien = sinhVienService.findSinhVienByMSSV(sinhViens,mssv);
+        request.setAttribute("sv",sinhVien);
+        request.getRequestDispatcher("/buoi3/update-sinh-vien.jsp").forward(request,response);
     }
 
-    private void viewAddSinhVien(HttpServletRequest request, HttpServletResponse response) {
+    private void viewAddSinhVien(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/buoi3/add-sinh-vien.jsp").forward(request,response);
     }
 
-    private void detailSinhVien(HttpServletRequest request, HttpServletResponse response) {
+    private void detailSinhVien(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Lay gia tri tu jsp ve servlet
+        String mssv = request.getParameter("id");
+        SinhVien sinhVien = sinhVienService.findSinhVienByMSSV(sinhViens,mssv);
+        request.setAttribute("sv",sinhVien);
+        request.getRequestDispatcher("/buoi3/detail-sinh-vien.jsp").forward(request,response);
     }
 
-    private void removeSinhVien(HttpServletRequest request, HttpServletResponse response) {
+    private void removeSinhVien(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Lay gia tri tu jsp ve servlet
+        String mssv = request.getParameter("id");
+        sinhVienService.removeSinhVien(sinhViens,mssv);
+        // Quay lai trang hien thi
+        // C1: Copy code o ham hien thi
+//        if(sinhViens.isEmpty()){
+//            sinhViens = sinhVienService.fakeData();
+//        }
+//        request.setAttribute("listSinhVien", sinhViens);
+//        request.getRequestDispatcher("/buoi3/sinhviens.jsp").forward(request, response);
+          // C2: Send Redirect
+        response.sendRedirect("/sinh-vien/hien-thi");
     }
 
     private void searchSinhVien(HttpServletRequest request, HttpServletResponse response) {
     }
 
     private void hienThiSinhVien(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        sinhViens.add(new SinhVien("HangNT169", "Nguyễn Thuý Hằng", 10, "Hà Nội", false));
-        sinhViens.add(new SinhVien("PhongTT35", "Trần Tuấn Phong", 11, "Hà Nội1", true));
-        sinhViens.add(new SinhVien("NguyenVV4", "Vũ Văn Nguyên", 12, "Hà Nội2", true));
-        sinhViens.add(new SinhVien("KhanhPG", "Phạm Gia Khánh", 13, "Hà Nội", true));
-        sinhViens.add(new SinhVien("TienNH21", "Nguyễn Hoàng Tiến", 14, "Hà Nội3", true));
-        sinhViens.add(new SinhVien("DungNA29", "Nguyễn Anh Dũng", 15, "Hà Nội4", true));
+        if(sinhViens.isEmpty()){
+            sinhViens = sinhVienService.fakeData();
+        }
         request.setAttribute("listSinhVien", sinhViens);
-        request.getRequestDispatcher("/buoi2/sinhviens.jsp").forward(request, response);
+        request.getRequestDispatcher("/buoi3/sinhviens.jsp").forward(request, response);
     }
 }
