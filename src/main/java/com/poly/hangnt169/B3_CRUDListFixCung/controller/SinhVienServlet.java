@@ -26,7 +26,7 @@ import java.util.List;
         "/sinh-vien/add", // POST
         "/sinh-vien/update" //POST
 })
-public class SinhVienController extends HttpServlet {
+public class SinhVienServlet extends HttpServlet {
 
     private SinhVienService sinhVienService = new SinhVienServiceImpl();
     private List<SinhVien> sinhViens = new ArrayList<>();
