@@ -21,6 +21,7 @@
     <br/>
     <button><a href="/sinh-vien/view-add">Add Student</a></button>
     <tr>
+        <th>STT</th>
         <th>MSSV</th>
         <th>Tên</th>
         <th>Tuổi</th>
@@ -30,8 +31,9 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${listSinhVien}" var="sv">
+    <c:forEach items="${listSinhVien}" var="sv" varStatus="i">
         <tr>
+            <td>${i.index}</td>
             <td>${sv.mssv}</td>
             <td>${sv.ten}</td>
             <td>${sv.tuoi}</td>

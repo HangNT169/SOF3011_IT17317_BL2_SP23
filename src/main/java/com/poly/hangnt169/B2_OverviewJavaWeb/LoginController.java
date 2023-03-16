@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name = "LoginServlet", value = {"/login","/ket-qua"})
+@WebServlet(name = "LoginServlet", value = {"/login1","/ket-qua"})
 public class LoginController extends HttpServlet {
 
     // Controller là tầng trung gian trao đổi giữa client và server
