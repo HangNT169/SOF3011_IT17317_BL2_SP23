@@ -26,6 +26,21 @@ import lombok.ToString;
 @ToString
 public class Category {
 
+    // Java 3: JDBC
+    // Java 4: Hibernate
+    // Java 5 >: JPA
+    // Hibernate : Truy van tren thuc the (Entity) : HQL (Hibernate Query Language)
+    // ORM ( Object Relationship Mapping) : Mapping giua entity vs DB
+    // varchar/nvarchar <=> String
+    // int <=> Integer
+    // bigint <=> Long
+    // Mapping quan he : OneToOne (1-1), ManyToOne(N-1),OneToMany(1-N), ManyToMany(N-N)
+    // 1 Class Entity <=> 1 Table trong DB
+    // Cac truong thuoc tinh trong entity :
+    // Cot binh thuong
+    // Khoa Chinh
+    // Khoa ngoai
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,4 +51,5 @@ public class Category {
 
     @Column(name = "category_name")
     private String categoryName;
+
 }
