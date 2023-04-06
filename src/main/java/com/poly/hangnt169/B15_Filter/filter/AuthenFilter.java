@@ -19,7 +19,7 @@ import java.io.IOException;
 //@WebFilter(filterName = "AuthenFilter", value =
 //        {"/sinh-vien/hien-thi","/sinh-vien/view-add"
 //        })
-@WebFilter({"/sinh-vien/*"})
+@WebFilter({"/sinh-vien/*", "/CategoryServlet"})
 public class AuthenFilter implements Filter {
 
     // Khoi tao => Chay 1 lan duy nhat khi chuong trinh bat dau restart
