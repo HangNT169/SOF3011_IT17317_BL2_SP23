@@ -17,7 +17,7 @@ import java.io.IOException;
 public class DangNhapServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/dang-nhap.jsp").forward(request, response);
+        request.getRequestDispatcher("/dang-nhap14.jsp").forward(request, response);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class DangNhapServlet extends HttpServlet {
         // Check trong
         if (username.isEmpty() || password.isEmpty()) {
             request.setAttribute("mess", "Tài khoản hoặc mât khẩu đang trống");
-            request.getRequestDispatcher("/dang-nhap.jsp").forward(request, response);
+            request.getRequestDispatcher("/dang-nhap14.jsp").forward(request, response);
         }
 
         // Check validate
@@ -41,7 +41,7 @@ public class DangNhapServlet extends HttpServlet {
             response.sendRedirect("/home");
         } else {
             request.setAttribute("mess", "Tài khoản hoặc mât khẩu sai ");
-            request.getRequestDispatcher("/dang-nhap.jsp").forward(request, response);
+            request.getRequestDispatcher("/dang-nhap14.jsp").forward(request, response);
         }
     }
 }

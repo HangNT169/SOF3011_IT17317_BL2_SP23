@@ -77,11 +77,11 @@ public class SinhVienServlet extends HttpServlet {
     }
 
     private void addSinhVien(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String mssv= request.getParameter("mssv");
-        String tenStr= request.getParameter("ten");
-        String tuoi= request.getParameter("tuoi");
-        String diaChi= request.getParameter("diaChi");
-        String gioiTinh= request.getParameter("gioiTinh");
+        String mssv = request.getParameter("mssv");
+        String tenStr = request.getParameter("ten");
+        String tuoi = request.getParameter("tuoi");
+        String diaChi = request.getParameter("diaChi");
+        String gioiTinh = request.getParameter("gioiTinh");
         SinhVien sinhVien = SinhVien.builder()
                 .ten(tenStr)
                 .mssv(mssv)
@@ -97,27 +97,27 @@ public class SinhVienServlet extends HttpServlet {
     private void viewUpdateSinhVien(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Lay gia tri tu jsp ve servlet
         String mssv = request.getParameter("id");
-        SinhVien sinhVien = sinhVienService.findSinhVienByMSSV(sinhViens,mssv);
-        request.setAttribute("sv",sinhVien);
-        request.getRequestDispatcher("/buoi3/update-sinh-vien.jsp").forward(request,response);
+        SinhVien sinhVien = sinhVienService.findSinhVienByMSSV(sinhViens, mssv);
+        request.setAttribute("sv", sinhVien);
+        request.getRequestDispatcher("/buoi3/update-sinh-vien.jsp").forward(request, response);
     }
 
     private void viewAddSinhVien(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/buoi3/add-sinh-vien.jsp").forward(request,response);
+        request.getRequestDispatcher("/buoi3/add-sinh-vien.jsp").forward(request, response);
     }
 
     private void detailSinhVien(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Lay gia tri tu jsp ve servlet
         String mssv = request.getParameter("id");
-        SinhVien sinhVien = sinhVienService.findSinhVienByMSSV(sinhViens,mssv);
-        request.setAttribute("sv",sinhVien);
-        request.getRequestDispatcher("/buoi3/detail-sinh-vien.jsp").forward(request,response);
+        SinhVien sinhVien = sinhVienService.findSinhVienByMSSV(sinhViens, mssv);
+        request.setAttribute("sv", sinhVien);
+        request.getRequestDispatcher("/buoi3/detail-sinh-vien.jsp").forward(request, response);
     }
 
     private void removeSinhVien(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Lay gia tri tu jsp ve servlet
         String mssv = request.getParameter("id");
-        sinhVienService.removeSinhVien(sinhViens,mssv);
+        sinhVienService.removeSinhVien(sinhViens, mssv);
         // Quay lai trang hien thi
         // C1: Copy code o ham hien thi
 //        if(sinhViens.isEmpty()){
@@ -125,7 +125,7 @@ public class SinhVienServlet extends HttpServlet {
 //        }
 //        request.setAttribute("listSinhVien", sinhViens);
 //        request.getRequestDispatcher("/buoi3/sinhviens.jsp").forward(request, response);
-          // C2: Send Redirect
+        // C2: Send Redirect
         response.sendRedirect("/sinh-vien/hien-thi");
     }
 
@@ -133,7 +133,7 @@ public class SinhVienServlet extends HttpServlet {
     }
 
     private void hienThiSinhVien(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(sinhViens.isEmpty()){
+        if (sinhViens.isEmpty()) {
             sinhViens = sinhVienService.fakeData();
         }
         request.setAttribute("listSinhVien", sinhViens);
